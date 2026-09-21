@@ -29,5 +29,21 @@ interface CasoDao{
     @Query("SELECT * FROM casos WHERE id = :id")
     suspend fun obtenerCasoId(id: Int): Caso?
 }
-class DAOs {
+
+@Dao
+interface EntrevistaDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertEntrevista(entrevista: Entrevista)
+
+    @Query("SELECT * FROM entrevistas WHERE casoId = :casoId")
+    fun obtenerEntrevistasPorCaso(casoId: Int): Flow<List<Entrevista>>
+}
+
+@Dao
+interface EvidenciaDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertarEvidencia(evidencia: Evidencia)
+
+    @Query("SELECT * FROM evidencias WHERE casoId = :casoId")
+    fun obtenerEvidenciasCaso(casoId: Int): Flow<List<Evidencia>>
 }
