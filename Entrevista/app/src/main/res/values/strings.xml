@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">Entrevista</string>
+    <string name="app_name">Casos de Investigacion</string>
+
+    <string name="hola_periodista">Hola, periodista</string>
+    <string name="subtitulo_inicio">Organiza tus entrevistas,\nconstruye tus historias.</string>
+    <string name="nuevo_caso">Nuevo caso</string>
+    <string name="crear_tema_investigacion">Crea un nuevo tema\nde investigación</string>
+    <string name="mis_casos">Mis casos</string>
+    <string name="revisa_gestiona">Revisa y gestiona\ntus investigaciones</string>
+    <string name="nueva_entrevista">Nueva entrevista</string>
+    <string name="registra_conversacion">Registra una conversación</string>
+    <string name="estadisticas">Estadísticas</string>
+
+    <string name="resumen">Resumen</string>
+    <string name="entrevistas">Entrevistas</string>
+    <string name="conclusiones">Conclusiones</string>
+    <string name="evidencias">Evidencias</string>
+
+    <string name="estado_investigacion">En investigación</string>
+    <string name="estado_publicado">Publicado</string>
+    <string name="estado_cerrado">Cerrado</string>
 </resources>
