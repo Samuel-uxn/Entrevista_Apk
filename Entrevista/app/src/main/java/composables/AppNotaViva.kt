@@ -22,6 +22,7 @@ fun AppNotaViva(
 ) {
     var pantalla by remember { mutableStateOf("inicio") }
     var casoSeleccionado by remember { mutableStateOf(0) }
+    var modoNuevaEntrevista by remember { mutableStateOf(false) }
 
     BackHandler(enabled = pantalla != "inicio") {
         pantalla = when (pantalla) {
@@ -29,10 +30,11 @@ fun AppNotaViva(
             "detalle" -> "casos"
             "nuevoCaso" -> "inicio"
             "editarCaso" -> "detalle"
-            "nuevaEntrevista" -> "detalle"
+            "nuevaEntrevista" -> if (modoNuevaEntrevista) "casos" else "detalle"
             "estadisticas" -> "inicio"
             else -> "inicio"
         }
+        modoNuevaEntrevista = false
     }
 
     Box(
@@ -46,7 +48,10 @@ fun AppNotaViva(
                 PantallaInicio(
                     irACasos = { pantalla = "casos" },
                     nuevoCaso = { pantalla = "nuevoCaso" },
-                    nuevaEntrevista = { pantalla = "casos" },
+                    nuevaEntrevista = {
+                        modoNuevaEntrevista = true
+                        pantalla = "casos"
+                    },
                     estadisticas = { pantalla = "estadisticas" }
                 )
             }
@@ -59,7 +64,11 @@ fun AppNotaViva(
                     abrirCaso = { id ->
                         casoSeleccionado = id
                         detalleViewModel.cargarDetallesDelCaso(id)
-                        pantalla = "detalle"
+                        pantalla = if (modoNuevaEntrevista) {
+                            "nuevaEntrevista"
+                        } else {
+                            "detalle"
+                        }
                     }
                 )
             }
@@ -94,7 +103,10 @@ fun AppNotaViva(
                 PantallaNuevaEntrevista(
                     detalleViewModel = detalleViewModel,
                     casoId = casoSeleccionado,
-                    volver = { pantalla = "detalle" }
+                    volver = {
+                        pantalla = if (modoNuevaEntrevista) "casos" else "detalle"
+                        modoNuevaEntrevista = false
+                    }
                 )
             }
 
