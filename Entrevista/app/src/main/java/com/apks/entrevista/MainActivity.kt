@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import composables.PantallaInicio
 import logic.BaseDatos
 import logic.CasoViewModel
 import logic.DetalleCasoViewModel
@@ -43,8 +44,7 @@ class MainActivity : ComponentActivity() {
 
         // 4. El punto de entrada visual de Jetpack Compose
         setContent {
-            // Aquí es donde llamaremos a las pantallas que diseñes.
-            // Por ahora lo dejamos vacío para que el proyecto compile sin errores.
+            PantallaInicio(viewModel = casoViewModel)
         }
     }
 }
