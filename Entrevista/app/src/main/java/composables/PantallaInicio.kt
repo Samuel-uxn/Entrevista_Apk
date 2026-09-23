@@ -238,14 +238,12 @@ fun TarjetaInicio(
     }
 }
 
-
 @Composable
 fun BarraInferior(
     inicio: Boolean,
     irInicio: () -> Unit,
     irCasos: () -> Unit
 ) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -254,71 +252,40 @@ fun BarraInferior(
         horizontalArrangement = Arrangement.SpaceAround
     ) {
 
+        // 1. Botón de Inicio
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.clickable {
-                irInicio()
-            }
+            modifier = Modifier.clickable { irInicio() }
         ) {
-
             Text(
-                text = "⌂",
+                text = "?", // (Aquí va tu ícono)
                 fontSize = 24.sp,
-                color = if (inicio) {
-                    Color(0xFF1266D6)
-                } else {
-                    Color.Gray
-                }
+                color = if (inicio) Color(0xFF1266D6) else Color.Gray
             )
-
             Text(
                 text = "Inicio",
                 fontSize = 11.sp
             )
         }
 
+        // 2. Botón de Casos
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.clickable {
-                irCasos()
-            }
+            modifier = Modifier.clickable { irCasos() }
         ) {
-
             Text(
-                text = "▤",
+                text = "?", // (Aquí va tu ícono)
                 fontSize = 24.sp,
-                color = if (!inicio) {
-                    Color(0xFF1266D6)
-                } else {
-                    Color.Gray
-                }
+                color = if (!inicio) Color(0xFF1266D6) else Color.Gray
             )
-
             Text(
                 text = "Casos",
                 fontSize = 11.sp
             )
         }
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            Text(
-                text = "⚙",
-                fontSize = 24.sp,
-                color = Color.Gray
-            )
-
-            Text(
-                text = "Configuracion",
-                fontSize = 11.sp
-            )
-        }
     }
-
 }
-
 @Preview(showBackground = true)
 @Composable
 fun VistaPreviaInicio() {

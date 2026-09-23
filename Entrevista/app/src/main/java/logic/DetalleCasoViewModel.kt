@@ -82,4 +82,43 @@ class DetalleCasoViewModel(
             }
         }
     }
+    // 5. Cambiar el estado del caso dinámicamente
+    fun cambiarEstado(casoId: Int, nuevoEstado: String) {
+        viewModelScope.launch {
+            val caso = casoDao.obtenerCasoId(casoId)
+            if (caso != null) {
+                val casoActualizado = caso.copy(
+                    estado = nuevoEstado
+                )
+                casoDao.actualizarCaso(casoActualizado)
+                _casoActual.value = casoActualizado // Actualiza la interfaz automáticamente en Compose
+            }
+        }
+    }
+    // 6. Editar los campos principales del caso (titulo, descripcion, fecha)
+    fun editarCaso(casoId: Int, titulo: String, descripcion: String, fecha: String) {
+        viewModelScope.launch {
+            val caso = casoDao.obtenerCasoId(casoId)
+            if (caso != null) {
+                val casoActualizado = caso.copy(
+                    titulo = titulo,
+                    descripcion = descripcion,
+                    fecha = fecha
+                )
+                casoDao.actualizarCaso(casoActualizado)
+                _casoActual.value = casoActualizado
+            }
+        }
+    }
+
+    // 7. Eliminar el caso actual (en cascada elimina tambien sus entrevistas y evidencias)
+    fun eliminarCasoActual(onEliminado: () -> Unit) {
+        viewModelScope.launch {
+            val caso = _casoActual.value
+            if (caso != null) {
+                casoDao.eliminarCaso(caso)
+                onEliminado()
+            }
+        }
+    }
 }
